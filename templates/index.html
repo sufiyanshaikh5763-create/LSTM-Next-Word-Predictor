@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NextWord AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-mark">N</span>
+      <span><strong>NextWord</strong><small>LSTM-powered prediction</small></span>
+    </a>
+    <div class="top-actions"><span class="status"><span class="status-dot"></span><span id="model-status">Checking model</span></span><a class="top-cta" href="#predictor">Try it now ↗</a></div>
+  </header>
+
+  <main class="shell">
+    <section id="predictor" class="hero hero-stage">
+      <div class="hero-stat stat-left"><strong>10M+</strong><span>Model parameters</span></div>
+      <div class="hero-stat stat-right"><strong>1–10</strong><span>Words generated</span></div>
+      <p class="eyebrow">AI WRITING COMPANION</p>
+      <h1>Write at the speed<br>of <em>thought.</em></h1>
+      <p class="hero-copy">Generate thoughtful continuations with an LSTM model trained on the <strong>News Category Dataset</strong>.</p>
+      <a class="hero-cta" href="#prompt"><span>✦</span> Try it now</a>
+    </section>
+
+    <section class="workspace glass-card">
+      <div class="section-heading">
+        <div><p class="eyebrow">YOUR PROMPT</p><h2>Start writing</h2></div>
+        <span class="model-chip"><span class="chip-dot"></span> Neural language model</span>
+      </div>
+      <textarea id="prompt" placeholder="Start typing your sentence here..." maxlength="2000"></textarea>
+      <div class="input-footer"><span id="character-count">0 / 2000</span><span>Press predict to continue your thought</span></div>
+      <div class="controls">
+        <div class="length-control">
+          <div class="length-header"><span class="control-label">Words to generate</span><output id="word-value">5</output></div>
+          <input id="word-slider" type="range" min="1" max="10" value="5" step="1" aria-label="Number of words to generate">
+          <div class="slider-scale"><span>1</span><span>5</span><span>10</span></div>
+        </div>
+        <div class="action-buttons">
+          <button id="clear-button" class="button secondary">Clear</button>
+          <button id="predict-button" class="button primary"><span class="button-label">Predict continuation</span><span class="spinner"></span><span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="results glass-card hidden">
+      <div class="section-heading"><div><p class="eyebrow">PREDICTION RESULT</p><h2>Your continuation</h2></div><span id="timing" class="timing"></span></div>
+      <div class="result-block"><span class="result-label">Original input</span><p id="original-output"></p></div>
+      <div class="result-block"><span class="result-label">Generated continuation</span><p id="continuation-output" class="continuation"></p></div>
+      <div class="complete-block"><div><span class="result-label">Complete sentence</span><p id="sentence-output"></p></div><button id="copy-button" class="copy-button" title="Copy generated text">Copy</button></div>
+      <div class="result-meta"><span><strong id="word-count">0</strong> words generated</span><span class="spark">✦</span><span>Autoregressive generation</span></div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+      <div><p class="eyebrow">UNDER THE HOOD</p><h2>From your words to the next idea</h2><p>Each prediction is fed back into the model, allowing it to build a natural continuation one word at a time.</p><div class="dataset-note"><span>▣</span><div><strong>Trained on News Category Dataset</strong><small>Learning patterns from real-world headlines and descriptions</small></div></div></div>
+      <div class="workflow"><div><b>01</b><span>⌨</span><strong>User input</strong></div><i>→</i><div><b>02</b><span>⌘</span><strong>Tokenization</strong></div><i>→</i><div><b>03</b><span>▤</span><strong>Padding</strong></div><i>→</i><div><b>04</b><span>✦</span><strong>LSTM model</strong></div><i>→</i><div><b>05</b><span>✎</span><strong>New words</strong></div></div>
+    </section>
+    <section id="about-model" class="model-banner">
+      <span class="banner-orb"></span>
+      <div><p class="eyebrow">TRAINED TO UNDERSTAND CONTEXT</p><h2>News language, one word at a time.</h2></div>
+      <span class="banner-label">NEWS CATEGORY DATASET <b>✦</b></span>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
